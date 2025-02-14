@@ -3,74 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weecosmetics - Organic & Herbal Beauty</title>
+    <title>Weecosmetics - Pure Herbal & Organic Skincare</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f8f8f8; }
-        header { background: #6a994e; color: white; padding: 15px; text-align: center; font-size: 24px; }
-        .banner { text-align: center; padding: 20px; }
-        .products { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-        .product { background: white; border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 8px; width: 260px; text-align: center; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); }
-        .product img { width: 100%; border-radius: 5px; }
-        .product p { color: #555; }
-        .product button { background: #388e3c; color: white; border: none; padding: 10px; cursor: pointer; border-radius: 5px; width: 100%; }
-        .product button:hover { background: #2e7d32; }
-    </style>
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        async function fetchProducts() {
-            const productsContainer = document.getElementById("products");
-            productsContainer.innerHTML = "<p>Loading products...</p>";
-
-            const querySnapshot = await getDocs(collection(db, "products"));
-            let productsHTML = "";
-            
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                let variantsHTML = "";
-                for (let size in data.variant) {
-                    variantsHTML += `<p>${size}: ₹${data.variant[size].price}</p>
-                                     <img src="${data.variant[size].imageURL}" width="100">`;
-                }
-
-                productsHTML += `
-                    <div class="product">
-                        <img src="${data.imageURL || 'https://via.placeholder.com/200'}" alt="${data.name}">
-                        <h2>${data.name}</h2>
-                        <p>${data.description}</p>
-                        ${variantsHTML}
-                        <button>Add to Cart</button>
-                    </div>`;
-            });
-
-            productsContainer.innerHTML = productsHTML;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f8f8f8;
         }
-
-        window.onload = fetchProducts;
-    </script>
+        .header {
+            background-color: #6b8e23;
+            padding: 15px;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .banner {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            margin: 10px auto;
+            display: block;
+        }
+        .tagline {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4a4a4a;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header>Weecosmetics - Pure Herbal & Organic Skincare</header>
-    <div class="banner">
-        <img src="https://via.placeholder.com/800x300" alt="Banner" width="100%">
+
+    <div class="header">
+        Weecosmetics - Pure Herbal & Organic Skincare
     </div>
-    <div class="products" id="products">
-        <!-- Products will be dynamically loaded here -->
+
+    <img src="weecosmetics-banner.png" alt="Weecosmetics Banner" class="banner">
+
+    <div class="tagline">
+        From the hands of Siddha Doctors
     </div>
+
 </body>
 </html>
