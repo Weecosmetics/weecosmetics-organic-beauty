@@ -5,49 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeeCosmetics</title>
     <style>
-        * {
+        /* Reset some default browser styles */
+        body, h1, h2, p {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
-        body {
-            background-color: #f5f5f5;
-            text-align: center;
-        }
+
+        /* Header styling */
         .header {
-            background-color: #6b8e23;
+            background-color: #668000; /* Green shade */
             color: white;
-            padding: 15px;
-            font-size: 24px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Logo styling */
+        .logo {
+            width: 120px; /* Adjust size as needed */
+            height: auto;
+            margin-right: 20px;
+        }
+
+        /* Title styling */
+        .header-title {
+            font-size: 22px;
             font-weight: bold;
         }
+
+        /* Banner section */
         .banner {
-            width: 90%;
-            max-width: 1000px;
+            width: 100%;
             height: auto;
-            margin: 20px auto;
             display: block;
-            border-radius: 10px;
+            margin-top: 10px;
         }
+
+        /* Main content */
         .content {
-            margin: 20px;
-            font-size: 18px;
-            color: #333;
+            text-align: center;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
+
+    <!-- Header Section -->
     <div class="header">
-        WeeCosmetics - Pure Herbal & Organic Skincare
+        <img src="logo.jpg" alt="WeeCosmetics Logo" class="logo">
+        <div class="header-title">WeeCosmetics - Pure Herbal & Organic Skincare</div>
     </div>
-    
+
     <!-- Banner Image -->
-    <img src="weecosmetics-banner.png" alt="WeeCosmetics Banner" style="width: 100%; height: auto; display: block; margin: 0 auto; max-width: 1200px;">
-    
+    <img src="weecosmetics-banner.png" alt="WeeCosmetics Banner" class="banner">
+
+    <!-- Main Content -->
     <div class="content">
-        <h2>Welcome to WeeCosmetics</h2>
+        <h1>Welcome to WeeCosmetics</h1>
         <p>From the Hands of Siddha Doctors - Experience Nature’s Touch</p>
     </div>
+
 </body>
 </html>
