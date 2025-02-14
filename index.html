@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeeCosmetics</title>
     <style>
-        /* Reset some default browser styles */
+        /* Reset default styles */
         body, h1, h2, p {
             margin: 0;
             padding: 0;
@@ -19,23 +19,25 @@
             padding: 15px 20px;
             display: flex;
             align-items: center;
-            justify-content: center; /* Center the content */
-            position: relative; /* Needed for absolute positioning */
+            justify-content: center; /* Ensures the text is centered */
+            position: relative; /* For absolute positioning of the logo */
+            text-align: center;
         }
 
         /* Logo styling */
         .logo {
-            width: 120px; /* Adjust size as needed */
+            width: 100px; /* Adjust the size as needed */
             height: auto;
             position: absolute;
-            left: 20px; /* Keeps the logo on the left */
+            left: 20px; /* Keeps the logo correctly positioned on the left */
+            top: 50%;
+            transform: translateY(-50%); /* Ensures proper vertical alignment */
         }
 
         /* Title styling */
         .header-title {
             font-size: 22px;
             font-weight: bold;
-            text-align: center;
         }
 
         /* Banner section */
