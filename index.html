@@ -4,6 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeeCosmetics</title>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js";
+
+        // Firebase configuration (Replace with your actual Firebase details)
+        const firebaseConfig = {
+            apiKey: "your-api-key",
+            authDomain: "your-auth-domain",
+            databaseURL: "your-database-url",
+            projectId: "your-project-id",
+            storageBucket: "your-storage-bucket",
+            messagingSenderId: "your-messaging-sender-id",
+            appId: "your-app-id"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Fetch products from Firebase
+        async function fetchProducts() {
+            const productsRef = ref(database, 'products/');
+            const snapshot = await get(productsRef);
+
+            if (snapshot.exists()) {
+                const products = snapshot.val();
+                displayProducts(products);
+            } else {
+                console.log("No products available");
+            }
+        }
+
+        // Display products
+        function displayProducts(products) {
+            const productsContainer = document.getElementById("products");
+            productsContainer.innerHTML = ""; // Clear previous data
+
+            Object.keys(products).forEach((key) => {
+                const product = products[key];
+                const productCard = document.createElement("div");
+                productCard.classList.add("product-card");
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h2>${product.name}</h2>
+                    <p>Price: ₹${product.price}</p>
+                    <button onclick="addToCart('${key}', '${product.name}', '${product.price}', '${product.image}')">Add to Cart</button>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        // Load products when the page loads
+        window.onload = fetchProducts;
+    </script>
     <style>
         body, h1, h2, p {
             margin: 0;
@@ -22,16 +77,16 @@
             position: relative;
         }
 
-        /* Logo styling (Fixed Size & Aligned Left) */
+        /* Logo styling */
         .logo {
-            width: 60px; /* Adjusted for better size */
+            width: 60px;
             height: 60px;
             position: absolute;
-            left: 15px; /* Moves it slightly for balance */
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            border-radius: 50%; /* Ensures a clean circular logo */
-            object-fit: cover; /* Keeps image proportions clean */
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         /* Title styling */
@@ -54,6 +109,51 @@
             text-align: center;
             padding: 20px;
         }
+
+        /* Products Section */
+        .products-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Product Grid */
+        .product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Product Card */
+        .product-card {
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: white;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 8px 12px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
     </style>
 </head>
 <body>
@@ -71,6 +171,12 @@
     <div class="content">
         <h1>Welcome to WeeCosmetics</h1>
         <p>From the Hands of Siddha Doctors - Experience Nature’s Touch</p>
+    </div>
+
+    <!-- Product Section -->
+    <div class="products-section">
+        <h2>Our Products</h2>
+        <div id="products" class="product-container"></div>
     </div>
 
 </body>
